@@ -2,9 +2,6 @@
 // 调试开关，正式部署时应该设置为false
 defined('DEBUG') or define('DEBUG', true);
 
-// 单元测试开关
-defined('TEST') or define('TEST', false);
-
 // 是否网站模式
 defined('SITE_MODE') or define('SITE_MODE', false);
 
