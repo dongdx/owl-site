@@ -1,17 +1,48 @@
 <?php
+
 return [
     'services' => [
         'redis' => [
-            'class' => '\Owl\Service\Predis',
+            'class'      => '\Owl\Service\Predis',
             'parameters' => [
-                'scheme' => 'tcp',
-                'host' => '127.0.0.1',
-                'port' => 6379,
+                'scheme'     => 'tcp',
+                'host'       => '127.0.0.1',
+                'port'       => 6379,
                 'persistent' => true,
-                'timeout' => 3,
+                'timeout'    => 3,
             ],
-            'options' => [
+            'options'    => [
                 'exception' => true,
+            ],
+        ],
+    ],
+    'logger'   => [
+        'default' => [
+            'handlers' => [
+                // [
+                //     'class' => '\Monolog\Handler\ChromePHPHandler',
+                //     'level' => 'DEBUG'
+                // ],
+                // [
+                //     'class' => '\Monolog\Handler\FirePHPHandler',
+                //     'level' => 'DEBUG'
+                // ],
+                [
+                    'class'     => '\Monolog\Handler\StreamHandler',
+                    // 'arguments' => [__DIR__.'/logs/sys-'.date('Y-m-d').'.log'],
+                    'arguments' => ['php://output'],
+                    'level'     => 'DEBUG',
+                ],
+            ],
+        ],
+        'crontab' => [
+            'handlers' => [
+                [
+                    'class'     => '\Monolog\Handler\StreamHandler',
+                    // 'arguments' => [__DIR__.'/logs/crontab-'.date('Y-m-d').'.log'],
+                    'arguments' => ['php://output'],
+                    'level'     => 'DEBUG',
+                ],
             ],
         ],
     ],
