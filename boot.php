@@ -136,7 +136,7 @@ function __get_swoole_app(array $config)
 function __exception_headers($exception, $max_line)
 {
     if ($previous = $exception->getPrevious()) {
-        return __exception_headers($previous);
+        return __exception_headers($previous, $max_line);
     }
 
     $headers = [];

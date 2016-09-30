@@ -16,7 +16,7 @@ return [
             ],
         ],
     ],
-    'logger'   => [
+    'loggers'  => [
         'default' => [
             'handlers' => [
                 // [
