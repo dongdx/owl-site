@@ -4,7 +4,7 @@
 // * * * * * php -q bin/crontab
 
 if (!extension_loaded('swoole')) {
-    echo "Require \"swoole\" extension";
+    echo 'Require "swoole" extension';
 
     exit(1);
 }
@@ -23,15 +23,15 @@ $jobs = [
 ];
 
 foreach ($jobs as $job) {
-    $process = new swoole_process(function($worker) use ($job, $logger) {
+    $process = new swoole_process(function ($worker) use ($job, $logger) {
         if (is_array($job)) {
             list($class, $name) = $job;
         } else {
             list($class, $name) = [$job, null];
         }
 
-        $job = new $class($name);
         try {
+            $job    = new $class($name);
             $result = $job->start();
         } catch (\Throwable $error) {
             log_exception($logger, $error);
