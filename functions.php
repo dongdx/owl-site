@@ -38,7 +38,7 @@ function get_logger($name = 'default')
 function log_exception(LoggerInterface $logger, $exception, $level = 'error')
 {
     if ($previous = $exception->getPrevious()) {
-        return log_exception($previous);
+        return log_exception($logger, $previous, $level);
     }
 
     $message = sprintf('%s(%d): %s', get_class($exception), $exception->getCode(), $exception->getMessage());
