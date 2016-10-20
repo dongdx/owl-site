@@ -11,7 +11,7 @@ if (!extension_loaded('swoole')) {
 
 require __DIR__.'/../boot.php';
 
-$logger = get_logger('job');
+$logger = get_logger('crontab');
 \Model\Crontab::setLogger($logger);
 
 $jobs = [
@@ -34,6 +34,7 @@ foreach ($jobs as $job) {
             $job    = new $class($name);
             $result = $job->start();
         } catch (\Throwable $error) {
+            $result = false;
             log_exception($logger, $error);
         }
 
