@@ -13,14 +13,14 @@ function get_logger($name = 'default')
 
         $config = Config::get('loggers', $name);
         if (!$config) {
-            throw new \Exception('Undefined logger: '.$name);
+            throw new \Exception('Undefined logger: ' . $name);
         }
 
         foreach ($config['handlers'] as $handler_config) {
             $class = new \ReflectionClass($handler_config['class']);
 
             $arguments = \Owl\array_get_in($handler_config, ['arguments']) ?: [];
-            $handler   = $class->newInstanceArgs($arguments);
+            $handler = $class->newInstanceArgs($arguments);
 
             if (isset($handler_config['level'])) {
                 $handler->setLevel($handler_config['level']);

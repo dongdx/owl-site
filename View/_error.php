@@ -10,9 +10,10 @@
 </html>
 
 <?php
-function showException($exception) {
-    $output = '<h1>'. $exception->getMessage() .'</h1>';
-    $output .= '<p>'. nl2br($exception->getTraceAsString()) .'</p>';
+function showException($exception)
+{
+    $output = '<h1>' . $exception->getMessage() . '</h1>';
+    $output .= '<p>' . nl2br($exception->getTraceAsString()) . '</p>';
 
     if ($previous = $exception->getPrevious()) {
         $output = showException($previous) . $output;

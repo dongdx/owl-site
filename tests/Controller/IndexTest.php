@@ -1,20 +1,23 @@
 <?php
 namespace Tests\Controller;
 
-class IndexTest extends \Tests\ControllerTest {
-    public function testGet() {
+class IndexTest extends \Tests\ControllerTest
+{
+    public function testGet()
+    {
         $response = $this->execute([
-            'uri' => '/'
+            'uri' => '/',
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertRegExp('/<\/html>$/', (string)$response->getBody());
+        $this->assertRegExp('/<\/html>$/', (string) $response->getBody());
 
         $this->assertEquals('bar', $response->getCookie('foo'));
         $this->assertFalse($response->getCookie('bar'));
     }
 
-    public function testPost() {
+    public function testPost()
+    {
         $response = $this->execute([
             'uri' => '/',
             'method' => 'post',

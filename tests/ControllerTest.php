@@ -1,8 +1,10 @@
 <?php
 namespace Tests;
 
-abstract class ControllerTest extends \PHPUnit_Framework_TestCase {
-    protected function execute(array $options) {
+abstract class ControllerTest extends \PHPUnit_Framework_TestCase
+{
+    protected function execute(array $options)
+    {
         $path = isset($options['uri']) ? parse_url($options['uri'], PHP_URL_PATH) : '/';
         $cookies = \Tests\Mock\Cookie::getInstance()->get($path);
 
@@ -13,7 +15,7 @@ abstract class ControllerTest extends \PHPUnit_Framework_TestCase {
         }
 
         $request = \Owl\Http\Request::factory($options);
-        $response = new \Tests\Mock\Response;
+        $response = new \Tests\Mock\Response();
 
         $app = __get_fpm_app();
         $app->execute($request, $response);
@@ -21,7 +23,8 @@ abstract class ControllerTest extends \PHPUnit_Framework_TestCase {
         return $response;
     }
 
-    protected function resetCookie() {
+    protected function resetCookie()
+    {
         \Tests\Mock\Cookie::getInstance()->reset();
     }
 }

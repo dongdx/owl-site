@@ -1,7 +1,7 @@
 <?php
 define('SITE_MODE', true);
 
-require __DIR__.'/boot.php';
+require __DIR__ . '/boot.php';
 
 $command = isset($argv[1]) ? $argv[1] : '';
 
@@ -27,7 +27,8 @@ exit(0);
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function __start() {
+function __start()
+{
     if ($pid = __getpid()) {
         echo sprintf("other server run at pid %d\n", $pid);
         exit(1);
@@ -41,7 +42,8 @@ function __start() {
     $app->start();
 }
 
-function __stop() {
+function __stop()
+{
     if (!$pid = __getpid()) {
         echo "server not run\n";
         exit(1);
@@ -51,7 +53,8 @@ function __stop() {
     echo "server stoped\n";
 }
 
-function __status() {
+function __status()
+{
     if ($pid = __getpid()) {
         echo sprintf("server run at pid %d\n", $pid);
     } else {
@@ -59,7 +62,8 @@ function __status() {
     }
 }
 
-function __reload() {
+function __reload()
+{
     if (!$pid = __getpid()) {
         echo "server not run\n";
         exit(1);
@@ -69,19 +73,20 @@ function __reload() {
     echo "server reloaded\n";
 }
 
-function __getconfig() {
+function __getconfig()
+{
     static $config;
 
-    $add_path = function($file) {
+    $add_path = function ($file) {
         if (substr($file, 0, 1) === '/') {
             return $file;
         }
 
-        return ROOT_DIR.'/'.$file;
+        return ROOT_DIR . '/' . $file;
     };
 
     if (!$config) {
-        $config = parse_ini_file(ROOT_DIR.'/server.ini', true);
+        $config = parse_ini_file(ROOT_DIR . '/server.ini', true);
 
         if (isset($config['server']['pid_file'])) {
             $config['server']['pid_file'] = $add_path($config['server']['pid_file']);
@@ -95,7 +100,8 @@ function __getconfig() {
     return $config;
 }
 
-function __getpid() {
+function __getpid()
+{
     $config = __getconfig();
 
     $pid_file = $config['server']['pid_file'];

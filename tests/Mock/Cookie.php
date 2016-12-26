@@ -1,18 +1,21 @@
 <?php
 namespace Tests\Mock;
 
-class Cookie {
+class Cookie
+{
     use \Owl\Traits\Singleton;
 
     protected $data = [];
 
-    public function set($name, $value, $expire = 0, $path = '/', $domain = null) {
+    public function set($name, $value, $expire = 0, $path = '/', $domain = null)
+    {
         $domain = $this->normalizeDomain($domain);
         $path = $this->normalizePath($path);
-        $this->data[$domain][$path][$name] = [$value, (int)$expire];
+        $this->data[$domain][$path][$name] = [$value, (int) $expire];
     }
 
-    public function get($path = '/', $domain = null) {
+    public function get($path = '/', $domain = null)
+    {
         $domain = $this->normalizeDomain($domain);
         $path = $this->normalizePath($path);
         $now = time();
@@ -30,7 +33,9 @@ class Cookie {
 
                 foreach ($cookie_list as $name => $cookie) {
                     list($value, $expire) = $cookie;
-                    if ($expire && $expire < $now) continue;
+                    if ($expire && $expire < $now) {
+                        continue;
+                    }
 
                     $cookies[$name] = $value;
                 }
@@ -40,17 +45,22 @@ class Cookie {
         return $cookies;
     }
 
-    public function reset() {
+    public function reset()
+    {
         $this->data = [];
     }
 
-    private function normalizePath($path) {
+    private function normalizePath($path)
+    {
         $path = trim(strtolower($path), '/');
-        return $path ? '/'.$path.'/' : '/';
+
+        return $path ? '/' . $path . '/' : '/';
     }
 
-    private function normalizeDomain($domain) {
+    private function normalizeDomain($domain)
+    {
         $domain = trim(strtolower($domain), '.');
-        return $domain ? '.'.$domain.'.' : '.';
+
+        return $domain ? '.' . $domain . '.' : '.';
     }
 }
