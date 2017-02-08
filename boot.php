@@ -7,10 +7,10 @@ defined('SITE_MODE') or define('SITE_MODE', false);
 
 define('ROOT_DIR', __DIR__);
 
-require __DIR__ . '/vendor/autoload.php';
-require __DIR__ . '/functions.php';
+require __DIR__.'/vendor/autoload.php';
+require __DIR__.'/src/functions.php';
 
-\Owl\Application::registerNamespace('\\', __DIR__);
+\Owl\Application::registerNamespace('\\', __DIR__.'/src');
 
 set_error_handler(function ($errno, $error, $file = null, $line = null) {
     if (error_reporting() & $errno) {
@@ -35,7 +35,7 @@ function __bootstrap()
     $boot = true;
 
     // 加载配置文件
-    \Owl\Config::merge(require ROOT_DIR . '/config/main.php');
+    \Owl\Config::merge(require ROOT_DIR.'/config/main.php');
 
     // 初始化外部服务容器
     \Owl\Service\Container::getInstance()->setServices(\Owl\Config::get('services'));
@@ -76,7 +76,7 @@ function __ini_app(\Owl\Application $app)
         }
 
         if (!$request->isAjax()) {
-            $view = new \Owl\Mvc\View(ROOT_DIR . '/View');
+            $view = new \Owl\Mvc\View(ROOT_DIR.'/src/View');
             $response->write($view->render('_error', ['exception' => $exception]));
         }
     });
