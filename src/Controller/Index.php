@@ -3,7 +3,7 @@ namespace Controller;
 
 class Index extends \Controller
 {
-    public function GET()
+    public function get()
     {
         $this->response->withCookie('foo', 'bar');
 
