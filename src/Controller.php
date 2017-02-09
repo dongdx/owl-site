@@ -12,7 +12,7 @@ abstract class Controller
 
     protected function render($file, array $vars = [])
     {
-        $view = new \Owl\Mvc\View(ROOT_DIR . '/View');
+        $view = new \Owl\Mvc\View(ROOT_DIR . '/src/View');
 
         return $view->render($file, $vars);
     }
