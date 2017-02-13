@@ -15,3 +15,22 @@ services:
         image: php:fpm-alpine
         volumes:
             - "./:/wwwroot"
+#         links:
+#             - redis
+#             - mysql
+#     redis:
+#         image: redis:alpine
+#     mysql:
+#         image: mysql
+#         ports:
+#             - "127.0.0.1:3306:3306"
+#         volumes:
+#             - "dbdata:/var/lib/mysql"
+#         environment:
+#             # MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+#             MYSQL_ROOT_PASSWORD: "root"
+#             MYSQL_DATABASE: "mysite"
+#             MYSQL_USER: "dev"
+#             MYSQL_PASSWORD: "abc"
+# volumes:
+#     dbdata:
