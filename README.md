@@ -6,6 +6,10 @@ composer create-project yeaha/owl-site ./mysite
 
 # Run
 
+## Nginx
+
+see [docker/nginx/default.conf](./docker/nginx/default.conf)
+
 ## Docker
 
 ```
